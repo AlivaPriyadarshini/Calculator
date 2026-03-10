@@ -51,3 +51,18 @@ document.addEventListener("keydown", (e) => {
     clearScreen();
   }
 });
+const liveTime = document.getElementById("liveTime");
+const liveDate = document.getElementById("liveDate");
+
+function updateDateTime() {
+  const now = new Date();
+
+  const time = now.toLocaleTimeString();
+  const date = now.toLocaleDateString();
+
+  liveTime.textContent = time;
+  liveDate.textContent = date;
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();

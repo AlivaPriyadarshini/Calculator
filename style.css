@@ -16,10 +16,12 @@ body {
   color: white;
 }
 
-/* animated tech grid */
 .bg-grid {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background:
     linear-gradient(rgba(0, 255, 255, 0.08) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 255, 255, 0.08) 1px, transparent 1px);
@@ -72,15 +74,15 @@ body {
   }
 }
 
-/* calculator */
 .calculator {
   position: relative;
   width: 380px;
   padding: 22px;
   border-radius: 28px;
   background: rgba(8, 15, 35, 0.72);
-  border: 1px solid rgba(0, 255, 255, 0.18);
+  border: 2px solid rgba(0, 255, 255, 0.35);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   box-shadow:
     0 0 20px rgba(0, 255, 255, 0.12),
     0 0 60px rgba(106, 0, 255, 0.12),
@@ -89,19 +91,15 @@ body {
   overflow: hidden;
 }
 
-.calculator::before {
+.calculator::after {
   content: "";
   position: absolute;
-  inset: -2px;
-  border-radius: 30px;
-  padding: 2px;
-  background: linear-gradient(135deg, #00f7ff, #6a00ff, #00f7ff);
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  animation: borderRun 4s linear infinite;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00f7ff, transparent);
+  animation: borderScan 3s linear infinite;
 }
 
 @keyframes techEnter {
@@ -115,9 +113,32 @@ body {
   }
 }
 
-@keyframes borderRun {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+@keyframes borderScan {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 140%;
+  }
+}
+
+.calc-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  color: #bafcff;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+#liveTime {
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(0, 247, 255, 0.35);
+}
+
+#liveDate {
+  opacity: 0.85;
 }
 
 .top-bar {
@@ -130,7 +151,7 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .display-box {
@@ -178,9 +199,10 @@ body {
   cursor: pointer;
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.04),
-    0 6px 18px rgba(0,0,0,0.25);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 6px 18px rgba(0, 0, 0, 0.25);
   transition: 0.25s ease;
   overflow: hidden;
 }
@@ -195,7 +217,7 @@ body {
   background: linear-gradient(
     120deg,
     transparent,
-    rgba(255,255,255,0.22),
+    rgba(255, 255, 255, 0.22),
     transparent
   );
   transform: rotate(25deg);
@@ -209,8 +231,8 @@ body {
 .btn:hover {
   transform: translateY(-4px);
   box-shadow:
-    0 0 15px rgba(0,255,255,0.12),
-    0 8px 24px rgba(0,0,0,0.3);
+    0 0 15px rgba(0, 255, 255, 0.12),
+    0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .btn:active {
@@ -243,9 +265,19 @@ body {
 }
 
 @keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-7px); }
-  50% { transform: translateX(7px); }
-  75% { transform: translateX(-7px); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-7px);
+  }
+  50% {
+    transform: translateX(7px);
+  }
+  75% {
+    transform: translateX(-7px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
